@@ -10,7 +10,7 @@ class S3Logger(DataFrameLogger):
     def __init__(self, log_dir, bucket_name):
         super().__init__(log_dir)
         self.s3_file_sys = s3fs.S3FileSystem()
-        self.log_dir = os.path.join(f's3://{bucket_name}', log_dir)
+        self.log_dir = os.path.join(f's3://{bucket_name}', self.log_dir)
 
     def write_csv(self, *args):
         for table_name, records in self.data.items():

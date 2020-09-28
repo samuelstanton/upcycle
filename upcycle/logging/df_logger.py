@@ -6,7 +6,7 @@ import pandas as pd
 class DataFrameLogger(object):
     def __init__(self, log_dir):
         self.data = {}
-        self.log_dir = log_dir
+        self.log_dir = os.path.normpath(log_dir)
 
     def add_table(self, table_name, table_data=None):
         records = [] if table_data is None else table_data
