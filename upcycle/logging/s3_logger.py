@@ -2,6 +2,7 @@ import os
 import pickle
 import pandas as pd
 import s3fs
+from omegaconf import OmegaConf
 
 from .df_logger import DataFrameLogger
 
@@ -23,7 +24,7 @@ class S3Logger(DataFrameLogger):
     def write_hydra_yaml(self, cfg):
         save_path = os.path.join(self.log_dir, '.hydra', 'config.yaml')
         with self.s3_file_sys.open(save_path, 'w') as f:
-            f.write(cfg.pretty())
+            f.write(OmegaConf.to_yaml(cfg))
 
     def save_obj(self, obj, filename):
         save_path = os.path.join(self.log_dir, filename)
