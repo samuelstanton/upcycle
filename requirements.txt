@@ -1,4 +1,3 @@
 pandas
 numpy
 s3fs==0.4.2
-git+https://github.com/concentricsky/python-randomnames.git@master
