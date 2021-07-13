@@ -7,6 +7,8 @@ class DataFrameLogger(object):
     def __init__(self, log_dir):
         self.data = {}
         self.log_dir = os.path.normpath(log_dir)
+        if not os.path.exists(self.log_dir):
+            os.makedirs(self.log_dir)
 
     def add_table(self, table_name, table_data=None):
         records = [] if table_data is None else table_data
