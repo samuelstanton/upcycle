@@ -13,6 +13,7 @@ def s3_rglob(bucket_name, root_dir, glob_pattern):
         for obj in page['Contents']:
             if root_dir in obj['Key'] and fnmatch(obj['Key'], glob_pattern):
                 results.append(f's3://{bucket_name}/{obj["Key"]}')
+    results.sort()
     return results
 
 
