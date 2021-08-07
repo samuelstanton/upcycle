@@ -28,7 +28,7 @@ def s3_load_yaml(bucket_name, root_dir, glob_pattern):
     for file in remote_files:
         with file_sys.open(file, 'r') as f:
             results.append(yaml.full_load(f))
-    return results
+    return results, remote_files
 
 
 def s3_load_obj(bucket_name, root_dir, glob_pattern):
@@ -42,4 +42,4 @@ def s3_load_obj(bucket_name, root_dir, glob_pattern):
     for file in remote_files:
         with file_sys.open(file, 'rb') as f:
             results.append(pkl.load(f))
-    return results
+    return results, remote_files
