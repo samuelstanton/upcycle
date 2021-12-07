@@ -1,6 +1,7 @@
 import os
 import pickle
 import pandas as pd
+from omegaconf import OmegaConf
 
 
 class DataFrameLogger(object):
@@ -27,8 +28,12 @@ class DataFrameLogger(object):
             save_df.to_csv(os.path.join(save_dir, f'{table_name}.csv'), index=False)
 
     def write_hydra_yaml(self, cfg):
-        """Hydra automatically generates a local log of the config"""
-        pass
+        yaml_dir = os.path.join(self.log_dir, '.hydra')
+        if not os.path.exists(yaml_dir):
+            os.makedirs(yaml_dir)
+        save_path = os.path.join(yaml_dir, 'config.yaml')
+        with open(save_path, 'w') as f:
+            f.write(OmegaConf.to_yaml(cfg))
 
     def save_obj(self, obj, filename):
         save_path = os.path.join(self.log_dir, filename)
