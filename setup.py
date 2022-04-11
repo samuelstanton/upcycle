@@ -11,7 +11,6 @@ REQUIREMENTS_FILE = "requirements.txt"
 REQUIREMENTS_PATH = path.join(path.abspath(__file__), REQUIREMENTS_FILE)
 with open(REQUIREMENTS_FILE) as f:
     requirements = f.read().splitlines()
-requirements.append("python-randomnames @ git+https://github.com/concentricsky/python-randomnames.git@master")
 
 setup(
     name=NAME,

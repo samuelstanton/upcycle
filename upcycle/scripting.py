@@ -3,13 +3,12 @@ from upcycle.random.seed import set_all_seeds
 import hydra
 from omegaconf import OmegaConf, DictConfig
 import torch
-from randomnames import random_namepair
-
+import randomname
 
 def startup(hydra_cfg):
     trial_id = hydra_cfg.trial_id
     if hydra_cfg.job_name is None:
-        hydra_cfg.job_name = '_'.join(random_namepair().lower().split(' ') + [str(trial_id)])
+        hydra_cfg.job_name = '_'.join(randomname.get_name().lower().split('-') + [str(trial_id)])
     hydra_cfg.seed = random.randint(0, 100000) if hydra_cfg.seed is None else hydra_cfg.seed
     set_all_seeds(hydra_cfg.seed)
 
